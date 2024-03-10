@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
   #для ленты постов
   def index
-    
+    @posts = Post.all
   end
 
   #Для показа постов конкретного пользователя
@@ -27,6 +27,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:body, images: []).merge(user_id: current_user.id)
+      params.require(:post).permit(:body, :image).merge(user_id: current_user.id)
     end
 end
