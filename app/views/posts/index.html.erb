@@ -22,9 +22,11 @@
     </div>
     <div class="col-lg-7">
       <% @posts.each do |post| %>
-        <% if post.image.attached? %>
-          <%= image_tag post.image %>
-        <% end%>
+        <% if post.images.attached? %>
+          <% for image in post.images do %>
+            <%= image_tag image, class: 'img-thumbnail' %>
+          <% end %>
+        <% end %>
         <div class = "table-bordered mb-4">
           <p>текст поста: <%= post.body %></p>
         </div>
