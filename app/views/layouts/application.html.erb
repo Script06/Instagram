@@ -20,4 +20,21 @@
 
     <%= yield %>
   </body>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Показываем модальное окно при наличии flash-уведомлений
+        notice = document.querySelector('.notice');
+        
+      if (notice.textContent == 'Пост успешно создан') {
+        removeNotice();
+        alert("пост создан успешно");
+      }
+      });
+
+    function removeNotice(notice){
+      $('.notice').remove();
+    }
+  </script>
+  
 </html>

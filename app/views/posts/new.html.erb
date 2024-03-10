@@ -8,20 +8,20 @@
 <body>
   <div class="container">
     <div class="row justify-content-center align-items-center" style="height: 100vh;">
-      <div class="col-lg-6">
+      <div class="col-lg-4">
         <%= form_with(model: @post, html: { class: "justify-content-center" }) do |form| %>
-      <div class="field row justify-content-center align-items-center">
-          <%= form.label :images %>
-          <%= form.file_field :images, multiple: true %>
+      <div class="form-group">
+          <%= form.label "Выберите фотографии:" %>
+          <%= form.file_field :images, multiple: true, class: "form-control" %>
       </div>
 
-      <div class="field row justify-content-center align-items-center mb-4">
-        <%= form.label :body %>
-        <%= form.text_area :body %>
+      <div class="form-group">
+        <%= form.label "Добавьте описание" %>
+        <%= form.text_area :body, class: "form-control" %>
       </div>
 
-      <div class="actions row justify-content-center align-items-center">
-        <%= form.submit %>
+      <div class="form-group">
+        <%= form.submit controller.action_name = "Поделиться", class: "btn btn-primary" %>
       </div>
         <% end %>
       </div>

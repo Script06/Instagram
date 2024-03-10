@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+ .notice {
+  background-color: #dff0d8; /* Цвет фона */
+  border: 1px solid #d0e9c6; /* Цвет границы */
+  color: #3c763d; /* Цвет текста */
+  padding: 15px; /* Отступы */
+  margin-bottom: 15px; /* Отступ снизу */
+}
+

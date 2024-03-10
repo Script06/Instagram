@@ -1,13 +1,23 @@
 class PostsController < ApplicationController
-
   def new
     @post = Post.new
   end
 
   def create
     post_params
-    #debugger
     post = Post.create(post_params)
+    flash[:notice] = "Пост успешно создан"
+    redirect_to root_path
+  end
+
+  #для ленты постов
+  def index
+    
+  end
+
+  #Для показа постов конкретного пользователя
+  def show
+    
   end
 
   private
@@ -19,5 +29,4 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:body, images: []).merge(user_id: current_user.id)
     end
-
 end
