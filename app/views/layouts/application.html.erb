@@ -13,7 +13,41 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="row">
+      <div class="container-fluid">
+        <div class="row text-center">
+          <div class="col-lg-3 text-center">
+            <h4>Instagram</h4>
+          </div>
+          <div class="col-lg-3"></div>
+          <div class="col-lg-3"></div>
+          <div class="col-lg-3">
+            <div>
+              <h4><%= render partial: "layouts/logout_button" %></h4>
+              <h4>Hello, <%= current_user.username %></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid" >
+      <div class="row text-center">
+        <div class="col-lg-2 table-bordered ml-4" id="menu">
+          <div class= "mt-4">
+            <%= link_to "Главная", root_path %>
+          </div>
+          <div class="button mt-2"><%= button_to "Создать пост", new_post_path, method: :get %></div>
+          <div class="button mt-2"><%= button_to "Мои публикации", user_posts_path, method: :get %></div>
+          <div></div>
+        </div>
+        <%= yield %>
+        <div class="col-lg-2">
+          <div class="container text-center">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, illo?
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
