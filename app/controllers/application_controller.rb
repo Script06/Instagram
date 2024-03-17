@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 
   include Pundit::Authorization
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   protected
 
   def configure_permitted_parameters
@@ -15,6 +17,11 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   private
+
+  def user_not_authorized
+    flash[:alert] = 'Нет прав на выполнение этого действия'
+    redirect_back(fallback_location: root_path)
+  end
 
   def layout_by_resource
     if devise_controller? && resource_name == :user && action_name == 'new'

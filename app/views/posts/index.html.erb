@@ -1,8 +1,9 @@
+  
 <div class="col-lg-7">
   <!--ТУТ НАЧИНАЕТСЯ ВЫВОД ПОСТА С КАРУСЕЛЯМИ-->
-  <div class="col-lg-9">
-    <% @posts.each do |post| %>
-      <% if post.images.attached? %>
+  <% @posts.each do |post| %>
+    <% if post.images.attached? %>
+      <div class="col-lg-9">
         <div id="carouselExampleControls<%= post.id %>" class="carousel slide" data-interval="false" data-ride="carousel" style="background-color: rgba(169, 169, 169, 0.5);">
           <div class="carousel-inner">
             <% post.images.each_with_index do |image, index|  %>
@@ -26,8 +27,29 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-        <p>текст поста: <%= post.body %> </p>
-      <% end %>
+        <div class="row mt-2 border-bottom">
+          <div class="col-lg-2">
+            <button type="button" class="btn btn-light">Like</button>
+          </div>
+          <div class="col-lg-7 text-center">
+            {число лайков} отметок "Нравится"
+          </div>
+          <div class="col-lg-3">
+            <p>Автор: <%= post.user.username %> </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 border-bottom text-center">
+            <p>текст поста: <%= post.body %> </p>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-lg-12">
+            <p>Комментарии:</p>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </div>
+  <% end %>
+  <!--ТУТ Заканчивается-->
 </div>

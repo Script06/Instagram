@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: 'posts#index'
 
-  resources :posts
-  resources :user_posts, only: %i[index destroy edit]
+  # resources :posts, only: %i[index]
+  resources :user_posts, only: %i[index new create update destroy edit]
 end
