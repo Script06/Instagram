@@ -1,7 +1,7 @@
 class UserPostsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
-  before_action :authorize_user_post!
-  # after_action :verify_authorized, except: %i[index]
+  before_action :authorize_user_post!, only: %i[edit update destroy]
+  after_action :verify_authorized, only: %i[edit update destroy]
 
   def index
     @posts = Post.where(user_id: current_user.id)
@@ -24,6 +24,8 @@ class UserPostsController < ApplicationController
     attachments.map(&:purge)
   end
 
+  def edit; end
+
   def destroy
     @post.destroy
     respond_to do |format|
@@ -36,7 +38,7 @@ class UserPostsController < ApplicationController
   private
 
   def authorize_user_post!
-    authorize(@post || Post)
+    authorize(@post || Post, policy_class: UserPostPolicy)
   end
 
   def set_post

@@ -1,4 +1,4 @@
-class PostPolicy < ApplicationPolicy
+class UserPostPolicy < ApplicationPolicy
   attr_reader :user, :post
 
   def initialize(user, post)
@@ -7,7 +7,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def index?
-    false
+    true
   end
 
   def show?
@@ -15,7 +15,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def create?
-    false
+    true
   end
 
   def new?
@@ -23,7 +23,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def update?
-    false
+    true if user.id.present? && user.id == @post.user_id
   end
 
   def edit?
@@ -31,6 +31,6 @@ class PostPolicy < ApplicationPolicy
   end
 
   def destroy?
-    false
+    true if user.id.present? && user.id == @post.user_id
   end
 end

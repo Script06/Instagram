@@ -28,8 +28,12 @@
         </div>
         <p>текст поста: <%= post.body %> </p>
       <% end %>
-      <%= button_to "редактировать пост", edit_user_post_path(post.id), method: :get %>
-      <%= button_to "Удалить пост", user_post_path(post.id), method: :delete, onclick: "return confirm('Вы точно хотите удалить пост?')" %>
+      <div class="row mb-5">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <%= button_to "редактировать", edit_user_post_path(post.id), class: "btn btn-secondary mr-2", method: :get %>
+          <%= button_to "Удалить", user_post_path(post.id), class: "btn btn-secondary", method: :delete, onclick: "return confirm('Вы точно хотите удалить пост?')" %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>
