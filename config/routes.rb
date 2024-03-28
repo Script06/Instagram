@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   resources :user_posts, only: %i[index new create update destroy edit]
   post 'like_post/:id', to: 'post_likes#like_post', as: 'like_post'
   get 'profiles/:username', to: 'profiles#index', as: :profile
+
+  resources :subscriptions, only: %i[create destroy]
 end

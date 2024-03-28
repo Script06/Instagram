@@ -22,6 +22,7 @@ class UserPostsController < ApplicationController
     @post.update(post_params)
     attachments = ActiveStorage::Attachment.where(id: params[:deleted_img_ids])
     attachments.map(&:purge)
+    redirect_to user_posts_path, notice: 'Пост успешно отредактирован'
   end
 
   def edit; end
