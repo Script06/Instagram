@@ -1,6 +1,14 @@
 class User < ApplicationRecord
-  has_many :subscriptions, foreign_key: :follower_id
-  has_many :subscribers, through: :subscriptions, source: :following, class_name: 'User'
+  has_many :posts, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
+
+  has_many :follower_relationships, dependent: :destroy, foreign_key: :following_id, class_name: 'Subscription'
+  has_many :followers, through: :follower_relationships, source: :follower, dependent: :destroy
+
+  has_many :following_relationships, dependent: :destroy, foreign_key: :follower_id, class_name: 'Subscription'
+  has_many :following, through: :following_relationships, source: :following
+
+  has_many :comments, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -15,6 +23,6 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
 
   def following?(other_user)
-    subscribers.exists?(other_user.id)
+    following.exists?(other_user.id)
   end
 end

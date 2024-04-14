@@ -4,8 +4,8 @@
   </div>
   <div class="row justify-content-center align-items-center border-bottom mb-5">
     <div class="col-lg-2">публикаций</div>
-    <div class="col-lg-2">подписчиков</div>
-    <div class="col-lg-2">подписок</div>
+    <div class="col-lg-2"><%= @user.followers.count %> подписчиков</div>
+    <div class="col-lg-2"><%= @user.following.count %> подписок</div>
   </div>
   <% if @posts.empty? %>
     <H1>У вас ещё нет записей</H1>

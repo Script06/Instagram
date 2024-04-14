@@ -1,6 +1,6 @@
 <div class="col-lg-7">
   <div class="row justify-content-center align-items-center border-bottom mb-5">
-    <H1 class = " ">Главная</H1>
+    <H1 class = " ">Мои подписки</H1>
   </div>
   <!--ТУТ НАЧИНАЕТСЯ ВЫВОД ПОСТА С КАРУСЕЛЯМИ-->
   <div class="row">
@@ -52,39 +52,11 @@
               <%end%>
             </div>
           </div>
-          <h6>комментарии:</h6>
-          <% post.comments.each do |comment| %>
-            <div class="row mb-5 border">
-              <div class="col-2">
-                <b>
-                  <p class="mr-3 text-dark">
-                    <%= link_to comment.user.username, profile_path(comment.user.username), style: 'color: black' %>
-                  </p>
-                </b>
-              </div>
-              <div class="col-10 text-left">
-                <%= comment.content %>
-              </div>
-              <div class="col-3 text-left">
-                <%=comment[:created_at].strftime('%F %H:%M')%>
-              </div>
-              <div class="col">
-                <% if current_user. id == comment.user.id %>
-                  <%= button_to 'Удалить', comment_path(comment.id), method: :delete %>
-                <%end%>
-              </div>
+          <div class="row text-center">
+            <div class="col-lg-12">
+              <p>Комментарии:</p>
             </div>
-          <%end%>
-          <%= form_with(model: @comment, url: comments_path, method: :post, class: "mb-5") do |form| %>
-            <%= form.hidden_field :user_id, value: post.user.id %>
-            <%= form.hidden_field :post_id, value: post.id %>
-            <div class="field">
-              <%= form.text_area :content, placeholder: 'Ваш комментарий', required: true %>
-            </div>
-            <div class="actions">
-              <%= form.submit 'Отправить комментарий', class: 'btn btn-primary' %>
-            </div>
-          <% end %>
+          </div>
         <% end %>
       <% end %>
     </div>
