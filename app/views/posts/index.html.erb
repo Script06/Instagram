@@ -33,7 +33,12 @@
           </div>
           <div class="row mt-2 border-bottom">
             <div class="col-lg-2">
-              <%= button_to "Like", like_post_path(post), method: :post %>
+              <% has_like = post.likes.find { |like| like.user_id == current_user.id} %>
+              <% if has_like %>
+                <%= button_to 'Не нравится', post_like_path(post_id: post.id, id: has_like.id), method: :delete %>
+              <% else %>
+                <%= button_to "Нравится", post_likes_path(post_id: post.id), method: :post %>
+              <% end %>
             </div>
             <div class="col-lg-7 text-center">
               <p><%=post.likes_count%> отметок "нравится" </p>

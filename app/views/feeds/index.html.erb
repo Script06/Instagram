@@ -33,7 +33,7 @@
           </div>
           <div class="row mt-2 border-bottom">
             <div class="col-lg-2">
-              <%= button_to "Like", like_post_path(post), method: :post %>
+              <%= button_to "Like", post_likes_path(post.id), method: :post %>
             </div>
             <div class="col-lg-7 text-center">
               <p><%=post.likes_count%> отметок "нравится" </p>

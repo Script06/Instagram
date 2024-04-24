@@ -6,9 +6,8 @@ Rails.application.routes.draw do
   root to: 'posts#index'
 
   resources :user_posts, only: %i[index new create update destroy edit]
-  post 'like_post/:id', to: 'post_likes#like_post', as: 'like_post'
+  resources :post_likes, only: %i[create destroy]
   get 'profiles/:username', to: 'profiles#index', as: :profile
-
   resources :subscriptions, only: %i[create destroy]
   resources :feeds, only: %i[index]
   resources :comments, only: %i[create destroy]
