@@ -70,13 +70,18 @@
               <div class="col-10 text-left">
                 <%= comment.content %>
               </div>
-              <div class="col-3 text-left">
-                <%=comment[:created_at].strftime('%F %H:%M')%>
-              </div>
-              <div class="col">
+              <div class="row">
+                <div class="col-4 text-left">
+                  <%=comment[:created_at].strftime('%F %H:%M')%>
+                </div>
                 <% if current_user. id == comment.user.id %>
-                  <%= button_to 'Удалить', comment_path(comment.id), method: :delete %>
-                <%end%>
+                  <div class="col-3">
+                    <%= button_to 'Изменить', edit_comment_path(comment.id), method: :get %>
+                  </div>
+                  <div class="col-3">
+                    <%= button_to 'Удалить', comment_path(comment.id), method: :delete %>
+                  </div>
+                <% end %>
               </div>
             </div>
           <%end%>

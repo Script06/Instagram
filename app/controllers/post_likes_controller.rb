@@ -15,12 +15,12 @@ class PostLikesController < ApplicationController
   end
 
   def destroy
-    if !already_liked?
-      flash[:notice] = 'Нельзя ставить дизлайк, если не стоит лайк, мамкин хацкер'
-    else
+    if already_liked?
       @like.destroy
       @post.likes_count -= 1
       @post.save
+    else
+      flash[:notice] = 'Нельзя ставить дизлайк, если вы не ставили лайк'
     end
 
     redirect_to root_path

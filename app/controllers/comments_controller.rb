@@ -15,6 +15,14 @@ class CommentsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def edit; end
+
+  def update
+    @comment.update(comment_params)
+
+    redirect_to root_path
+  end
+
   private
 
   def set_comment
