@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   get 'profiles/:username', to: 'profiles#index', as: :profile
   resources :subscriptions, only: %i[create destroy]
   resources :feeds, only: %i[index]
-  resources :comments, only: %i[create destroy edit update]
+  resources :comments, only: %i[create destroy update]
 end

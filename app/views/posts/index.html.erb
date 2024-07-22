@@ -67,7 +67,7 @@
                   </p>
                 </b>
               </div>
-              <div class="col-10 text-left">
+              <div class="col-10 text-left" id="comment-content-<%= comment.id %>">
                 <%= comment.content %>
               </div>
               <div class="row">
@@ -76,8 +76,9 @@
                 </div>
                 <% if current_user. id == comment.user.id %>
                   <div class="col-3">
-                    <%= button_to 'Изменить', edit_comment_path(comment.id), method: :get %>
+                    <button class= "edit-comment-btn" id="btn-edit-comment-<%= comment.id %>" data-id="<%= comment.id %>">Изменить</button>
                   </div>
+                  <div style="display: none">text</div>
                   <div class="col-3">
                     <%= button_to 'Удалить', comment_path(comment.id), method: :delete %>
                   </div>
@@ -102,3 +103,9 @@
 </div>
 <!--ТУТ Заканчивается-->
 </div>
+<script>
+  $('.edit-comment-btn').click(function() {
+    var comment_id = $(this).attr("data-id");
+    $('#comment-content-' + comment_id).hide();
+  });
+</script>

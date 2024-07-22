@@ -1,8 +1,0 @@
-<%= form_with(model: @comment, url: comment_path, method: :patch, class: "mb-5") do |form| %>
-  <div class="field">
-    <%= form.text_area :content, placeholder: 'Ваш комментарий', required: true %>
-  </div>
-  <div class="actions">
-    <%= form.submit 'Изменить комментарий', class: 'btn btn-primary' %>
-  </div>
-<% end %>

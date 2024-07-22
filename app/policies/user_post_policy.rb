@@ -23,7 +23,7 @@ class UserPostPolicy < ApplicationPolicy
   end
 
   def update?
-    true if user.id.present? && user.id == @post.user_id
+    user.id.present? && user.id == @post.user_id
   end
 
   def edit?
@@ -31,6 +31,6 @@ class UserPostPolicy < ApplicationPolicy
   end
 
   def destroy?
-    true if user.id.present? && user.id == @post.user_id
+    user.id.present? && user.id == @post.user_id
   end
 end
