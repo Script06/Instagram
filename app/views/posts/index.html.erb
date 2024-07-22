@@ -87,7 +87,6 @@
             </div>
           <%end%>
           <%= form_with(model: @comment, url: comments_path, method: :post, class: "mb-5") do |form| %>
-            <%= form.hidden_field :user_id, value: post.user.id %>
             <%= form.hidden_field :post_id, value: post.id %>
             <div class="field">
               <%= form.text_area :content, placeholder: 'Ваш комментарий', required: true %>
@@ -103,9 +102,3 @@
 </div>
 <!--ТУТ Заканчивается-->
 </div>
-<script>
-  $('.edit-comment-btn').click(function() {
-    var comment_id = $(this).attr("data-id");
-    $('#comment-content-' + comment_id).hide();
-  });
-</script>

@@ -4,9 +4,14 @@ class CommentsController < ApplicationController
   after_action :verify_authorized, only: %i[edit update destroy]
 
   def create
-    Comment.create(comment_params)
+    @comment = Comment.new(comment_params)
+    @comment.user = current_user
 
-    redirect_back(fallback_location: root_path)
+    if @comment.save
+      redirect_back(fallback_location: root_path, notice: 'Комментарий успешно создан.')
+    else
+      flash[:notice] = 'комментарий не создан, неизвестная ошибка'
+    end
   end
 
   def destroy
