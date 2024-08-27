@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  # FIXME: Сделать РЕСТовый путь для добавления\удаления лайка
   # Defines the root path route ("/")
   root to: 'posts#index'
 
@@ -10,5 +10,7 @@ Rails.application.routes.draw do
   get 'profiles/:username', to: 'profiles#index', as: :profile
   resources :subscriptions, only: %i[create destroy]
   resources :feeds, only: %i[index]
-  resources :comments, only: %i[create destroy update]
+  resources :posts do
+    resources :comments
+  end
 end

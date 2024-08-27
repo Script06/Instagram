@@ -1,24 +1,35 @@
 class CommentsController < ApplicationController
+  protect_from_forgery with: :exception
   before_action :set_comment, only: %i[edit update destroy]
   before_action :authorize_comment!, only: %i[edit update destroy]
   after_action :verify_authorized, only: %i[edit update destroy]
 
   def create
-    @comment = Comment.new(comment_params)
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.build(comment_params)
     @comment.user = current_user
-
-    if @comment.save
-      redirect_back(fallback_location: root_path, notice: 'Комментарий успешно создан.')
-    else
-      flash[:notice] = 'комментарий не создан, неизвестная ошибка'
+    # TODO: дописать ответ в случае ошибки, прописать html?
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to posts_path, notice: 'Комментарий был успешно добавлен.' } # для HTML форм
+        format.js
+      else
+        format.js
+      end
     end
   end
 
   def destroy
-    Comment.find(params[:id])&.destroy
+    # @comment&.destroy
 
-    redirect_back(fallback_location: root_path)
-    flash[:notice] = 'комментарий удалён'
+    if @comment.destroy
+      respond_to do |format|
+        format.js # Это вызовет delete.js.erb
+        #format.html { redirect_to some_path, notice: 'Комментарий удален.' }
+      end
+    else
+      format.js
+    end
   end
 
   def update

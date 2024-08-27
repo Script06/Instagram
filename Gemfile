@@ -82,4 +82,4 @@ group :test do
   gem 'webdrivers'
 end
 
-gem "debase", "= 0.2.5.beta2"
+gem 'debase', '= 0.2.5.beta2'

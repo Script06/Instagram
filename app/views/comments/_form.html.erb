@@ -1,0 +1,10 @@
+<%= form_with(model: [post, post.comments.build], data: { remote: true }, class: "mb-5") do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :post_id, value: post.id %>
+  <div class="field">
+    <%= f.text_area :content, class: "comment", placeholder: 'Ваш комментарий', required: true %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
+  </div>
+<% end %>

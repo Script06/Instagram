@@ -1,7 +1,7 @@
 class PostLikesController < ApplicationController
   before_action :find_post, only: %i[create destroy]
   before_action :find_like, only: %i[destroy]
-
+  # TODO: переделать, дурно пахнет
   def create
     if already_liked?
       flash[:notice] = 'Вы не можете лайкнуть запись больше одного раза!'

@@ -1,0 +1,7 @@
+//TODO : изменить ошибку на что-то другое?
+<% if @comment.errors.any? %>
+  alert("Ошибка: <%= j @comment.errors.full_messages.join(', ') %>");
+<% else %>
+  $("#comments-<%= @comment.post_id %>").append("<%= j render(@comment) %>");
+  $('.comment').val(''); /*для очистки полей ввода после добавления комментария*/
+<% end %>
