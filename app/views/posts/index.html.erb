@@ -35,7 +35,7 @@
             <div class="col-lg-2">
               <% has_like = post.likes.find { |like| like.user_id == current_user.id} %>
               <% if has_like %>
-                <%= button_to 'Не нравится', post_like_path(post_id: post.id, id: has_like.id), method: :delete %>
+                <%= button_to 'Не нравится', post_likes_path(post_id: post.id), method: :post %>
               <% else %>
                 <%= button_to "Нравится", post_likes_path(post_id: post.id), method: :post %>
               <% end %>

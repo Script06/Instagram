@@ -20,12 +20,10 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    # @comment&.destroy
-
     if @comment.destroy
       respond_to do |format|
-        format.js # Это вызовет delete.js.erb
-        #format.html { redirect_to some_path, notice: 'Комментарий удален.' }
+        format.js
+        # format.html { redirect_to some_path, notice: 'Комментарий удален.' }
       end
     else
       format.js
