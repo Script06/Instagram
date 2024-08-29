@@ -14,6 +14,7 @@ class CommentsController < ApplicationController
         format.html { redirect_to posts_path, notice: 'Комментарий был успешно добавлен.' } # для HTML форм
         format.js
       else
+        format.html { redirect_to posts_path, notice: 'Комментарий не был добавлен. Что-то пошло не так' }
         format.js
       end
     end
