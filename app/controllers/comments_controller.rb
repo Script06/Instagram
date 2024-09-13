@@ -1,20 +1,27 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   protect_from_forgery with: :exception
-  before_action :set_comment, only: %i[edit update destroy]
-  before_action :authorize_comment!, only: %i[edit update destroy]
-  after_action :verify_authorized, only: %i[edit update destroy]
+  before_action :set_comment, only: %i[edit destroy]
+  before_action :authorize_comment!, only: %i[edit destroy]
+  after_action :verify_authorized, only: %i[edit destroy]
+
+  SUCCESS_COMMENT = "Комментарий был успешно добавлен!"
+  ERROR_COMMENT = "Комментарий не был добавлен. Что-то пошло не так"
+  SUCCESS_DESTROY_COMMENT = "Комментарий успешно удален!"
+  ERROR_DESTROY_COMMENT = "Комментарий не был удален! Произошла ошибка"
 
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
-    # TODO: дописать ответ в случае ошибки, прописать html?
+
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to posts_path, notice: 'Комментарий был успешно добавлен.' } # для HTML форм
+        format.html { redirect_to posts_path, notice: SUCCESS_COMMENT }
         format.js
       else
-        format.html { redirect_to posts_path, notice: 'Комментарий не был добавлен. Что-то пошло не так' }
+        format.html { redirect_to posts_path, notice: ERROR_COMMENT }
         format.js
       end
     end
@@ -24,15 +31,12 @@ class CommentsController < ApplicationController
     if @comment.destroy
       respond_to do |format|
         format.js
-        # format.html { redirect_to some_path, notice: 'Комментарий удален.' }
+        format.html { redirect_to posts_path, notice: SUCCESS_DESTROY_COMMENT }
       end
     else
       format.js
+      format.html { redirect_to posts_path, notice: ERROR_DESTROY_COMMENT }
     end
-  end
-
-  def update
-    @comment.update(comment_params)
   end
 
   private

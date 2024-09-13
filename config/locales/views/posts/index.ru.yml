@@ -1,0 +1,9 @@
+ru:
+  title: Домашняя
+  like: нравится
+  unlike: не нравится
+  likes_count: лайков
+  user_path: Пользователь
+  created_at: дата создания
+  updated_at: изменено
+  comments: комментарии

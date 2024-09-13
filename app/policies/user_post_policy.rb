@@ -23,7 +23,7 @@ class UserPostPolicy < ApplicationPolicy
   end
 
   def update?
-    user.id.present? && user.id == @post.user_id
+    right_user?
   end
 
   def edit?
@@ -31,6 +31,12 @@ class UserPostPolicy < ApplicationPolicy
   end
 
   def destroy?
+    right_user?
+  end
+
+  private
+
+  def right_user?
     user.id.present? && user.id == @post.user_id
   end
 end

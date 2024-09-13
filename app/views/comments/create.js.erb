@@ -1,4 +1,3 @@
-//TODO : изменить ошибку на что-то другое?
 <% if @comment.errors.any? %>
   alert("Ошибка: <%= j @comment.errors.full_messages.join(', ') %>");
 <% else %>

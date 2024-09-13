@@ -3,6 +3,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.1'
 
+gem 'rails-i18n'
+
+#provides interfaces to erb-lint for vscode.
+gem 'erb_lint'
+
 # use this for authorization
 gem 'pundit'
 

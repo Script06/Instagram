@@ -23,7 +23,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def update?
-    user.id.present? && user.id == @comment.user_id
+    right_user?
   end
 
   def edit?
@@ -31,6 +31,12 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def destroy?
+    right_user?
+  end
+
+  private
+
+  def right_user?
     user.id.present? && user.id == @comment.user_id
   end
 end
