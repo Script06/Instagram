@@ -7,13 +7,6 @@ class UserPostsController < ApplicationController
   before_action :authorize_user_post!, only: %i[edit update destroy]
   after_action :verify_authorized, only: %i[edit update destroy]
 
-  SUCCESS_POST = "Пост успешно создан"
-  ERROR_POST = "Ошибка при создании поста"
-  SUCCESS_UPDATE_POST = "Пост успешно отредактирован"
-  ERROR_UPDATE_POST = "Ошибка при редактировании поста"
-  SUCCESS_DESTROY_POST = "Пост успешно удалён"
-  ERROR_DESTROY_POST = "Ошибка при удалении поста"
-
   def index
     @posts = Post.where(user_id: current_user.id)
   end
@@ -26,9 +19,9 @@ class UserPostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      redirect_to root_path, notice: SUCCESS_POST
+      redirect_to root_path, notice: t('.success_post')
     else
-      redirect_to root_path, notice: ERROR_POST
+      redirect_to root_path, notice: t('.error_post')
     end
   end
 
@@ -37,9 +30,9 @@ class UserPostsController < ApplicationController
       attachments = ActiveStorage::Attachment.where(id: params[:deleted_img_ids])
       attachments.each(&:purge)
 
-      redirect_to user_posts_path, notice: SUCCESS_UPDATE_POST
+      redirect_to user_posts_path, notice: t('.success_update_post')
     else
-      redirect_to user_posts_path, notice: ERROR_UPDATE_POST
+      redirect_to user_posts_path, notice: t('.error_update_post')
     end
   end
 
@@ -47,9 +40,9 @@ class UserPostsController < ApplicationController
 
   def destroy
     if @post.destroy
-      redirect_to user_posts_path, notice: SUCCESS_DESTROY_POST
+      redirect_to user_posts_path, notice: t('.success_destroy_post')
     else
-      redirect_to user_posts_path, notice: ERROR_DESTROY_POST
+      redirect_to user_posts_path, notice: t('.error_destroy_post')
     end
   end
 

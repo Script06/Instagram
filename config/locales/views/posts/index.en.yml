@@ -1,9 +1,0 @@
-en:
-  title: Home
-  like: like
-  unlike: unlike
-  likes_count: likes
-  user_path: User
-  created_at: created at
-  updated_at: updated at
-  comments: comments

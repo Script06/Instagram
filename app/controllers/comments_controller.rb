@@ -6,11 +6,6 @@ class CommentsController < ApplicationController
   before_action :authorize_comment!, only: %i[edit destroy]
   after_action :verify_authorized, only: %i[edit destroy]
 
-  SUCCESS_COMMENT = "Комментарий был успешно добавлен!"
-  ERROR_COMMENT = "Комментарий не был добавлен. Что-то пошло не так"
-  SUCCESS_DESTROY_COMMENT = "Комментарий успешно удален!"
-  ERROR_DESTROY_COMMENT = "Комментарий не был удален! Произошла ошибка"
-
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
@@ -18,10 +13,10 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to posts_path, notice: SUCCESS_COMMENT }
+        format.html { redirect_to posts_path, notice: t('.success_comment') }
         format.js
       else
-        format.html { redirect_to posts_path, notice: ERROR_COMMENT }
+        format.html { redirect_to posts_path, notice: t('.error_comment') }
         format.js
       end
     end
@@ -31,11 +26,11 @@ class CommentsController < ApplicationController
     if @comment.destroy
       respond_to do |format|
         format.js
-        format.html { redirect_to posts_path, notice: SUCCESS_DESTROY_COMMENT }
+        format.html { redirect_to posts_path, notice: t('.success_destroy_comment') }
       end
     else
       format.js
-      format.html { redirect_to posts_path, notice: ERROR_DESTROY_COMMENT }
+      format.html { redirect_to posts_path, notice: t('.error_destroy_comment') }
     end
   end
 

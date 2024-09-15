@@ -1,6 +1,6 @@
 <div class="col-lg-7">
   <div class="row justify-content-center align-items-center border-bottom mb-5">
-    <H1> <%= t('title') %> </H1>
+    <H1> <%= t('.title') %> </H1>
   </div>
   <!--ТУТ НАЧИНАЕТСЯ ВЫВОД ПОСТА С КАРУСЕЛЯМИ-->
   <div class="row">
@@ -35,16 +35,16 @@
             <div class="col-lg-2">
               <% has_like = post.likes.find { |like| like.user_id == current_user.id} %>
               <% if has_like %>
-                <%= button_to t('unlike'), post_likes_path(post_id: post.id), method: :post %>
+                <%= button_to t('.unlike'), post_likes_path(post_id: post.id), method: :post %>
               <% else %>
-                <%= button_to t('like'), post_likes_path(post_id: post.id), method: :post %>
+                <%= button_to t('.like'), post_likes_path(post_id: post.id), method: :post %>
               <% end %>
             </div>
             <div class="col-lg-7 text-center">
-              <p><%= post.likes_count %> <%= t('likes_count') %>  </p>
+              <p><%= post.likes_count %> <%= t('.likes_count') %>  </p>
             </div>
             <div class="col-lg-3">
-              <p> <%= link_to "#{h(t('user_path'))} : #{h(post.user.username)}", profile_path(post.user.username) %> </p>
+              <p> <%= link_to "#{h(t('.user_path'))} : #{h(post.user.username)}", profile_path(post.user.username) %> </p>
             </div>
           </div>
           <div class="row">
@@ -52,13 +52,13 @@
               <h6>
                 <%= post.body %> </h6>
               <% if post.created_at.to_i != post.updated_at.to_i %>
-                <p><%= t('updated_at') %>: <%= post[:updated_at].strftime('%F %H:%M') %></p>
+                <p><%= t('.updated_at') %>: <%= post[:updated_at].strftime('%F %H:%M') %></p>
               <% else %>
-                <p><%= t('created_at') %>: <%= post[:created_at].strftime('%F %H:%M') %></p>
+                <p><%= t('.created_at') %>: <%= post[:created_at].strftime('%F %H:%M') %></p>
               <% end %>
             </div>
           </div>
-          <h6><%= t('comments') %>: </h6>
+          <h6><%= t('.comments') %>: </h6>
           <aside>
             <div id="comments-<%= post.id %>">
               <% post.comments.each do |comment| %>

@@ -1,30 +1,26 @@
 # frozen_string_literal: true
 
-before_action :set_subscription, only: %i[destroy]
-before_action :create_subscription, only: %i[create]
-
 class SubscriptionsController < ApplicationController
-  SUBSCRIPTION_SUCCESS = "Вы успешно подписались!"
-  SUBSCRIPTION_ERROR = "Не удалось подписаться"
-  SUCCESS_DESTROY_SUBSCRIPTION = "Подписка успешно отменена!"
-  ERROR_DESTROY_SUBSCRIPTION = "Не удалось отменить подписку"
+  before_action :set_subscription, only: %i[destroy]
+  before_action :create_subscription, only: %i[create]
+
   def create
     if @subscription.save
       redirect_back(fallback_location: root_path,
-                    notice: SUBSCRIPTION_SUCCESS)
+                    notice: t('.subscription_success'))
     else
       redirect_back(fallback_location: root_path,
-                    notice: SUBSCRIPTION_ERROR)
+                    notice: t('.subscription_error'))
     end
   end
 
   def destroy
     if @subscription&.destroy
       redirect_back(fallback_location: root_path,
-                    notice: SUCCESS_DESTROY_SUBSCRIPTION)
+                    notice: t('.success_destroy_subscription'))
     else
       redirect_back(fallback_location: root_path,
-                    notice: ERROR_DESTROY_SUBSCRIPTION)
+                    notice: t('.error_destroy_subscription'))
     end
   end
 
