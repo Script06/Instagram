@@ -1,33 +1,87 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  #views
+  feeds:
+    index:
+      title: feeds
+      like: like
+      unlike: unlike
+      likes_count: likes
+      user_path: User
+      created_at: created at
+      updated_at: updated at
+      comments: comments
+  comments:
+    create:
+      success_comment: The comment was successfully added
+      error_comment: error adding comment
+    destroy:
+      success_destroy_comment: Comment successfully deleted
+      error_destroy_comment: comment deletion error
+    comment:
+      delete: delete
+    form:
+      placeholder: Your comment (no more than 200 char.)
+      save: save
+  layouts:
+    application:
+      en: English
+      ru: Russian
+      language_button: сhoose language
+      create_button: create post
+      feeds: feeds
+      user_posts: my posts
+      hello: Hi, 
+      home: home
+  posts:
+    index:
+        title: Home
+        like: like
+        unlike: unlike
+        likes_count: likes
+        user_path: User
+        created_at: created at
+        updated_at: updated at
+        comments: comments
+  profiles:
+    index:
+      error_find_user: user not found
+  user_posts:
+    create:
+      success_post: Post successfully created
+      error_post: Error creating post
+    update:
+      success_update_post: post successfully edited
+      error_update_post: error while editing post
+    destroy:
+      success_destroy_post: post successfully deleted
+      error_destroy_post: error deleting post
+    index:
+      my_profile: my profile
+      publications: publications
+      followers: followers
+      following: following
+      edit: edit
+      delete: delete
+      confirm_delete_post: Are you sure you want to delete the post?
+      no_have_post: You don't have any posts
+      create_button: create post
+    new:
+      add_photos: select your photos
+      add_description: description, max 1000 characters
+      create_button: create
+    edit:
+      select_photos: select photos to delete
+      description_label: edit description
+      edit: edit
+  #controllers
+  subscriptions:
+    create:
+      subscription_success: You have successfully subscribed
+      subscription_error: Failed to subscribe
+    destroy:
+      success_destroy_subscription: Subscription successfully canceled
+      error_destroy_subscription: Unable to cancel subscription
+
+
+  
+  

@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 class UserPostsController < ApplicationController
+  before_action :post_params, only: %i[create]
+  before_action :set_current_user, only: %i[index]
   before_action :set_post, only: %i[edit update destroy]
   before_action :authorize_user_post!, only: %i[edit update destroy]
   after_action :verify_authorized, only: %i[edit update destroy]
 
   def index
     @posts = Post.where(user_id: current_user.id)
-    @user = User.find_by(id: current_user.id)
   end
 
   def new
@@ -13,28 +16,34 @@ class UserPostsController < ApplicationController
   end
 
   def create
-    post_params
-    @post = Post.create(post_params)
-    flash[:notice] = 'Пост успешно создан'
-    redirect_to root_path
+    @post = Post.new(post_params)
+
+    if @post.save
+      redirect_to root_path, notice: t('.success_post')
+    else
+      redirect_to root_path, notice: t('.error_post')
+    end
   end
 
   def update
-    @post.update(post_params)
-    attachments = ActiveStorage::Attachment.where(id: params[:deleted_img_ids])
-    attachments.map(&:purge)
-    redirect_to user_posts_path, notice: 'Пост успешно отредактирован'
+    if @post.update(post_params)
+      attachments = ActiveStorage::Attachment.where(id: params[:deleted_img_ids])
+      attachments.each(&:purge)
+
+      redirect_to user_posts_path, notice: t('.success_update_post')
+    else
+      redirect_to user_posts_path, notice: t('.error_update_post')
+    end
   end
 
   def edit; end
 
   def destroy
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to user_posts_path, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
+    if @post.destroy
+      redirect_to user_posts_path, notice: t('.success_destroy_post')
+    else
+      redirect_to user_posts_path, notice: t('.error_destroy_post')
     end
-    flash[:notice] = 'пост удалён'
   end
 
   private
@@ -45,6 +54,10 @@ class UserPostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def set_current_user
+    @user = User.find_by(id: current_user.id)
   end
 
   def post_params

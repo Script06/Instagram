@@ -1,18 +1,37 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[edit update destroy]
-  before_action :authorize_comment!, only: %i[edit update destroy]
-  after_action :verify_authorized, only: %i[edit update destroy]
+  protect_from_forgery with: :exception
+  before_action :set_comment, only: %i[edit destroy]
+  before_action :authorize_comment!, only: %i[edit destroy]
+  after_action :verify_authorized, only: %i[edit destroy]
 
   def create
-    Comment.create(comment_params)
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.build(comment_params)
+    @comment.user = current_user
 
-    redirect_back(fallback_location: root_path)
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to posts_path, notice: t('.success_comment') }
+        format.js
+      else
+        format.html { redirect_to posts_path, notice: t('.error_comment') }
+        format.js
+      end
+    end
   end
 
   def destroy
-    Comment.find(params[:id])&.destroy
-
-    redirect_back(fallback_location: root_path)
+    if @comment.destroy
+      respond_to do |format|
+        format.js
+        format.html { redirect_to posts_path, notice: t('.success_destroy_comment') }
+      end
+    else
+      format.js
+      format.html { redirect_to posts_path, notice: t('.error_destroy_comment') }
+    end
   end
 
   private

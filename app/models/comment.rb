@@ -1,5 +1,6 @@
 class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :post
-  # написать валидацию на текст комментария
+
+  validates :content, length: { maximum: 200 }, presence: true
 end

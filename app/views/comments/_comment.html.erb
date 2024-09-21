@@ -1,0 +1,9 @@
+<div id="comment-<%= comment.id %>">
+  <h5><%= link_to comment.user.username, profile_path(comment.user.username), style: 'color: black' %> </h5>
+  <%= comment[:created_at].strftime('%F %H:%M') %>
+  <%= button_to t('.delete'), post_comment_path(comment.post_id, comment.id), class: "btn btn-secondary",
+   method: :delete, remote: true %>
+  <br>
+  <%= comment.content %>
+</div>
+<hr>

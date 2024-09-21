@@ -1,15 +1,15 @@
 <div class="col-lg-7">
   <div class="row justify-content-center align-items-center">
-    <H1 class = "mr-3">Мой профиль <%= params[:username] %></H1>
+    <H1 class = "mr-3"><%= t('.my_profile') %></H1>
   </div>
   <div class="row justify-content-center align-items-center border-bottom mb-5">
-    <div class="col-lg-2">публикаций</div>
-    <div class="col-lg-2"><%= @user.followers.count %> подписчиков</div>
-    <div class="col-lg-2"><%= @user.following.count %> подписок</div>
+    <div class="col-lg-2"> <%= t('.publications') %>: <%= @user.posts.count %></div>
+    <div class="col-lg-2"> <%= t('.followers')%>: <%= @user.followers.count %></div>
+    <div class="col-lg-2"> <%= t('.following')%>: <%= @user.following.count %></div>
   </div>
   <% if @posts.empty? %>
-    <H1>У вас ещё нет записей</H1>
-    <%= button_to "Создать пост", new_user_post_path, method: :get %>
+    <H1><%= t('.no_have_post') %> </H1>
+    <%= button_to t('.create_button'), new_user_post_path, method: :get %>
   <% end %>
   <!--ТУТ НАЧИНАЕТСЯ ВЫВОД ПОСТА С КАРУСЕЛЯМИ-->
   <div class="row">
@@ -40,12 +40,13 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-          <p>текст поста: <%= post.body %> </p>
+          <hr>
+          <p><%= post.body %> </p>
         <% end %>
         <div class="row mb-5">
           <div class="btn-group" role="group" aria-label="Basic example">
-            <%= button_to "редактировать", edit_user_post_path(post.id), class: "btn btn-secondary mr-2", method: :get %>
-            <%= button_to "Удалить", user_post_path(post.id), class: "btn btn-secondary", method: :delete, onclick: "return confirm('Вы точно хотите удалить пост?')" %>
+            <%= button_to t('.edit'), edit_user_post_path(post.id), class: "btn btn-secondary mr-2", method: :get %>
+            <%= button_to t('.delete'), user_post_path(post.id), class: "btn btn-secondary", method: :delete, onclick: "return confirm('#{t('.confirm_delete_post')}')" %>
           </div>
         </div>
       <% end %>

@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -10,6 +10,10 @@ module Instagram
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+
+    config.i18n.available_locales = %i[en ru]
+    config.i18n.default_locale = :ru
+    # config.action_view.form_with_generates_remote_forms = true
 
     # Configuration for the application, engines, and railties goes here.
     #

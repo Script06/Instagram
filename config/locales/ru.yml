@@ -1,0 +1,91 @@
+ru:
+  #views
+  feeds:
+    index:
+      title: мои подписки
+      like: нравится
+      unlike: не нравится
+      likes_count: лайков
+      user_path: Пользователь
+      created_at: дата создания
+      updated_at: изменено
+      comments: комментарии
+  comments:
+    create:
+      success_comment: Комментарий был успешно добавлен
+      error_comment: Комментарий не был добавлен. Что-то пошло не так
+    destroy:
+      success_destroy_comment: Комментарий успешно удален!
+      error_destroy_comment: Комментарий не был удален! Произошла ошибка
+    form:
+      placeholder: Ваш комментарий (не более 200 символов)
+      save: сохранить
+    comment:
+      delete: удалить
+  layouts:
+    application:
+      en: Английский
+      ru: Русский
+      language_button: выберите язык
+      create_button: создать пост
+      feeds: лента подписок
+      user_posts: мои публикации
+      hello: Привет,
+      home: домашняя
+  posts:
+    index:
+      title: Домашняя
+      like: нравится
+      unlike: не нравится
+      likes_count: лайков
+      user_path: Пользователь
+      created_at: дата создания
+      updated_at: изменено
+      comments: комментарии
+  profiles:
+    index:
+      error_find_user: пользователь не найден
+  user_posts:
+    create:
+      success_post: Пост успешно создан
+      error_post: Ошибка при создании поста
+    update:
+      success_update_post: пост успешно отредактирован
+      error_update_post: ошибка при редактировании поста
+    destroy:
+      success_destroy_post: пост успешно удалён
+      error_destroy_post: ошибка при удалении поста
+    index:
+      my_profile: мой профиль
+      publications: публикаций
+      followers: подписчиков
+      following: подписок
+      edit: редактировать
+      delete: удалить
+      confirm_delete_post: Вы точно хотите удалить пост?
+      no_have_post: У вас ещё нет записей
+      create_button: создать пост
+    new:
+      add_photos: Добавьте Ваши фото
+      add_description: Добавьте описание (не более 1000 символов)
+      create_button: поделиться 
+    edit:
+      select_photos: Отметьте галочкой фото, которое нужно удалить
+      description_label: изменить описание
+      edit: изменить
+  #controllers
+  subscriptions:
+    create:
+      subscription_success: Вы успешно подписались
+      subscription_error: Не удалось подписаться
+    destroy:
+      success_destroy_subscription: Подписка успешно отменена
+      error_destroy_subscription: Не удалось отменить подписку
+  application:
+    user_not_authorized:
+      not_allowed: Нет прав на выполнение этого действия
+
+
+
+  
+  
