@@ -1,6 +1,10 @@
 require "active_support/core_ext/integer/time"
+require "ruby-debug-ide"
+require "pry"
 
 Rails.application.configure do
+  config.active_record.verbose_query_logs = true
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
