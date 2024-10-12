@@ -26,4 +26,20 @@ class User < ApplicationRecord
   def following?(other_user)
     following.exists?(other_user.id)
   end
+
+  def follow(following_user)
+    Subscription.create(
+      follower_id: id,
+      following_id: following_user.id
+    )
+  end
+
+  def unfollow(following_user)
+    subscription = Subscription.find_by(
+      follower_id: id,
+      following_id: following_user.id
+    )
+
+    subscription&.destroy
+  end
 end

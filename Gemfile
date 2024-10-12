@@ -68,6 +68,7 @@ group :development, :test do
 
   # these are for the debugger
   gem 'pry', '~> 0.14.2'
+  gem 'rails-controller-testing'
   gem 'ruby-debug-ide', '~> 0.7.3'
 end
 

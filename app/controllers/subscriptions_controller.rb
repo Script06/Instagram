@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: %i[destroy]
-  before_action :create_subscription, only: %i[create]
+  before_action :set_user, only: %i[create destroy]
 
   def create
-    if @subscription.save
+    if current_user.follow(@user)
       redirect_back(fallback_location: root_path,
                     notice: t('.subscription_success'))
     else
@@ -15,7 +14,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    if @subscription&.destroy
+    if current_user.unfollow(@user)
       redirect_back(fallback_location: root_path,
                     notice: t('.success_destroy_subscription'))
     else
@@ -26,17 +25,7 @@ class SubscriptionsController < ApplicationController
 
   private
 
-  def create_subscription
-    @subscription = Subscription.new(
-      follower_id: current_user.id,
-      following_id: params[:id]
-    )
-  end
-
-  def set_subscription
-    @subscription = Subscription.find_by(
-      follower_id: current_user.id,
-      following_id: params[:id]
-    )
+  def set_user
+    @user = User.find(params[:id])
   end
 end
